@@ -1,12 +1,18 @@
 package com.example.kotlinproject
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kotlinproject.data.searchResponseData
+import com.example.kotlinproject.network.RequestURL
 import com.example.kotlinproject.search.SearchAdapter
-import com.example.kotlinproject.search.SearchItem
 import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var rvSearch: RecyclerView
@@ -18,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         btn_search.setOnClickListener{
             initSearchList()
+            getSearchResponse()
+            edt_search_keyword?.text = null
         }
     }
 
@@ -30,30 +38,34 @@ class MainActivity : AppCompatActivity() {
 
         rvSearch.layoutManager = LinearLayoutManager(this)
 
-        searchAdapter.data = listOf(
-            SearchItem(
-                title = "제목이다아아아아",
-                desc = "내용이다아아아아아"
-            ),
-            SearchItem(
-                title = "제목이다아아아아",
-                desc = "내용이다아아아아아"
-            ),
-            SearchItem(
-                title = "제목이다아아아아",
-                desc = "내용이다아아아아아"
-            ),
-            SearchItem(
-                title = "제목이다아아아아",
-                desc = "내용이다아아아아아"
-            ),
-            SearchItem(
-                title = "제목이다아아아아",
-                desc = "내용이다아아아아아"
-            )
-        )
-
         searchAdapter.notifyDataSetChanged()
+    }
+
+    private fun getSearchResponse(){
+        val call: Call<searchResponseData> =
+            RequestURL.service.getSearchResult(query = edt_search_keyword.text.toString())
+        call.enqueue(object : Callback<searchResponseData> {
+            override fun onFailure(call: Call<searchResponseData>, t: Throwable) {
+                Log.e("getSearchResponse",t.toString())
+            }
+
+            override fun onResponse(
+                call: Call<searchResponseData>,
+                response: Response<searchResponseData>
+            ) {
+                val serchResult= response.body()?.items
+                if (response.isSuccessful) {
+                    if(serchResult!=null){
+                        searchAdapter.data = serchResult
+                        Log.d("명",serchResult.toString())
+                    }
+                    searchAdapter.notifyDataSetChanged()
+                }
+            }
+
+        })
+
+
     }
 }
 
