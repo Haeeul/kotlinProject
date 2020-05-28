@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 apply plugin: 'kotlin-android-extensions'
 
@@ -20,6 +21,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    dataBinding{
+        enabled = true
     }
 }
 
@@ -44,4 +48,30 @@ dependencies {
     //Retrofit 에서 Gson 을 사용하기 위한 라이브러리
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    kapt"com.android.databinding:compiler:3.1.1"
+
+//    // Koin for Kotlin
+//    implementation "org.koin:koin-core:$koin_version"
+//    // Koin extended & experimental features
+//    implementation "org.koin:koin-core-ext:$koin_version"
+//    // Koin for Unit tests
+//    testImplementation "org.koin:koin-test:$koin_version"
+//    // Koin for Java developers
+//    implementation "org.koin:koin-java:$koin_version"
+//
+//    // Koin for Android
+//    implementation "org.koin:koin-android:$koin_version"
+//    // Koin Android Scope features
+//    implementation "org.koin:koin-android-scope:$koin_version"
+//    // Koin Android ViewModel features
+//    implementation "org.koin:koin-android-viewmodel:$koin_version"
+//    // Koin Android Experimental features
+//    implementation "org.koin:koin-android-ext:$koin_version"
+//
+//    // Koin AndroidX Scope features
+//    implementation "org.koin:koin-androidx-scope:$koin_version"
+//    // Koin AndroidX ViewModel features
+//    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+//    // Koin AndroidX Experimental features
+//    implementation "org.koin:koin-androidx-ext:$koin_version"
 }
