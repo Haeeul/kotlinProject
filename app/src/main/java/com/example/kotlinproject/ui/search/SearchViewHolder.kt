@@ -1,4 +1,4 @@
-package com.example.kotlinproject.search
+package com.example.kotlinproject.ui.search
 
 import android.content.Intent
 import android.text.Html
@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinproject.R
-import com.example.kotlinproject.WebView
+import com.example.kotlinproject.ui.WebView
 import com.example.kotlinproject.data.searchResponseDataItem
 
 class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view){

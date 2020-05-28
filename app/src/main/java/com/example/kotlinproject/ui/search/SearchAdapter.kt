@@ -1,4 +1,4 @@
-package com.example.kotlinproject.search
+package com.example.kotlinproject.ui.search
 
 import android.content.Context
 import android.view.LayoutInflater

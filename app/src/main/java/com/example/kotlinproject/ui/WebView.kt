@@ -1,8 +1,9 @@
-package com.example.kotlinproject
+package com.example.kotlinproject.ui
 
 import android.os.Bundle
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kotlinproject.R
 import kotlinx.android.synthetic.main.activity_web_view.*
 
 class WebView : AppCompatActivity() {
